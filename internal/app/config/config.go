@@ -9,8 +9,9 @@ var defaultHttpPort = ":8080"
 
 // Config struct holds configuration values for database url and http port
 type Config struct {
-	DbUrl    string
-	HttpPort string
+	DbUrl       string
+	HttpPort    string
+	ExternalAPI string
 }
 
 // New creates new Config instance by reading environment variables
@@ -27,8 +28,14 @@ func New() (*Config, error) {
 		httpPort = defaultHttpPort
 	}
 
+	externalAPI := os.Getenv("EXTERNAL_API")
+	if externalAPI == "" {
+		return nil, fmt.Errorf("externalAPI не задан")
+	}
+
 	return &Config{
-		DbUrl:    dbURL,
-		HttpPort: httpPort,
+		DbUrl:       dbURL,
+		HttpPort:    httpPort,
+		ExternalAPI: externalAPI,
 	}, nil
 }
