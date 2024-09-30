@@ -8,4 +8,4 @@
 
 # Для запуска mockserver: curl -X PUT "http://localhost:1080/mockserver/expectation" -d @docs/expectation.json -H "Content-Type: application/json"
 
-# Подумать над пагинацией куплетов
+# Подумать над пагинацией куплетов, и external api с разными songDetail 
