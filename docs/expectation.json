@@ -1,0 +1,20 @@
+{
+  "httpRequest": {
+    "method": "GET",
+    "path": "/info"
+  },
+  "httpResponse": {
+    "statusCode": 200,
+    "body": {
+      "releaseDate": "01.02.2017",
+      "text": "First things first\nI'ma say all the words inside my head\nI'm fired up and tired of the way that things have been, oh-ooh\nThe way that things have been, oh-ooh\n\nSecond thing second\nDon't you tell me what you think that I could be\nI'm the one at the sail, I'm the master of my sea, oh-ooh\nThe master of my sea, oh-ooh\n\nI was broken from a young age\nTaking my sulking to the masses\nWriting my poems for the few\nThat look at me, took to me, shook to me, feeling me\nSinging from heartache from the pain\nTaking my message from the veins\nSpeaking my lesson from the brain\nSeeing the beauty through the...\n\nPain!\nYou made me a, you made me a believer, believer\nPain!\nYou break me down and build me up, believer, believer\nPain!\nOh, let the bullets fly, oh, let them rain\nMy life, my love, my drive, it came from...\nPain!\nYou made me a, you made me a believer, believer\n\nFirst things first\nCan you imagine what's about to happen?\nIt's Weezy the Dragon, I link with the Dragons\nAnd we gon' get ratchet, no need for imaginin'\n\nThis is what's happenin'\nSecond thing second, I reckon immaculate\nSound about accurate\nI know that strength, it don't come, don't come without strategy\nI know the sweet, it don't come without cavities\nI know the passages come with some traffic\nI start with from the basement, end up in the attic\nAnd third thing third\nWhoever call me out, they simply can't count\nLet's get mathematic, I'm up in this, huh\n\nIs you a believer?\nI get a unicorn out of a zebra\nI wear my uniform like a tuxedo\nThis dragon don't hold his breath, don't need no breather\nLove you Ms. Cita, the son of a leader\nI know the bloomin' don't come without rain\nI know the losin' don't come without shame\nI know the beauty don't come without hurt\n\nHol' up, hol' up, last thing last\nI know that Tunechi don't come without Wayne\nI know that losin' don't come without game\nI know that glory don't come without...\nDon't come without...\n\nPain!\nYou made me a, you made me a believer, believer\nPain!\nYou break me down and build me up, believer, believer\nPain\nOh, let the bullets fly, oh, let them rain\nMy life, my love, my drive, it came from...\nPain!\nYou made me a, you made me a believer, believer\n\nLast things last\nBy the grace of fire and flames\nYou're the face of the future, the blood in my veins, oh-ooh\nThe blood in my veins, oh-ooh\nBut they never did, ever lived, ebbing and flowing\nInhibited, limited 'til it broke open and rained down\nIt rained down, like...\n\nPain!\nYou made me a, you made me a believer, believer\nPain!\nYou break me down and build me up, believer, believer\nPain\nOh, let the bullets fly, oh, let them rain\nMy life, my love, my drive, it came from...\nPain!\nYou made me a, you made me a believer, believer",
+      "link": "https://www.youtube.com/watch?v=7wtfhZwyrcc"
+    },
+    "headers": {
+      "Content-Type": ["application/json"]
+    }
+  },
+  "times": {
+    "unlimited": true
+  }
+}

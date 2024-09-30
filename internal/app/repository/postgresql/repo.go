@@ -47,7 +47,7 @@ func (r *Repo) GetWithFilter(filter models.SongFilters, page, pageSize int) ([]m
 	argIndex := 1
 
 	if filter.Group != "" {
-		query += ` AND group = $` + strconv.Itoa(argIndex)
+		query += ` AND "group" = $` + strconv.Itoa(argIndex)
 		args = append(args, filter.Group)
 		argIndex++
 	}
@@ -180,8 +180,8 @@ func (r *Repo) Delete(id int) error {
 func (r *Repo) Create(song models.Song) (models.Song, error) {
 	r.logger.Infof("Create[repo]: Создание новой песни: %+v", song)
 
-	query := `INSERT INTO songs (group, song, release_date, text, link, created_at, updated_at) 
-	          VALUES ($1, $2, $3, $4, $5, NOW(), NOW()) RETURNING id, created_at, updated_at`
+	query := `INSERT INTO songs ("group", song, release_date, text, link, created_at, updated_at) 
+              VALUES ($1, $2, $3, $4, $5, NOW(), NOW()) RETURNING id, created_at, updated_at`
 	ctx := context.Background()
 
 	// Execute query and scan returned ID, created_at, and updated_at into song object

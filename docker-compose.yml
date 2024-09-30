@@ -54,5 +54,19 @@ services:
     networks:
       - net
 
+  # mockserver
+  mockserver:
+    image: mockserver/mockserver:latest
+    container_name: 'mockserver-container'
+    environment:
+      SERVER_PORT: 1080
+    ports:
+      - "1080:1080"
+    networks:
+      - net
+    volumes:
+      - ./docs:/docs
+    command: [ "-logLevel=INFO", "-verbose", "-mockServerExpectationsFile", "/docs/expectation.json" ]
+
 volumes:
   pgdata:

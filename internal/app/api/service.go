@@ -1,9 +1,7 @@
 package api
 
 import (
-	"encoding/json"
 	"errors"
-	"net/http"
 	"strings"
 	"time"
 
@@ -19,14 +17,12 @@ type Service interface {
 	GetSongText(id, page, pageSize int) ([]string, error)
 	UpdateSongById(id int, song models.Song) (models.Song, error)
 	DeleteSongById(id int) error
-	CreateSong(group, song string) (models.Song, error)
-	FetchSongDetails(group, song string) (*models.SongDetail, error)
+	CreateSong(group, song string, songDetails models.SongDetail) (models.Song, error)
 }
 
 type SongService struct {
-	repo        postgresql.Repository
-	externalAPI string
-	logger      *logrus.Logger
+	repo   postgresql.Repository
+	logger *logrus.Logger
 }
 
 func New(repo postgresql.Repository, logger *logrus.Logger) *SongService {
@@ -79,13 +75,8 @@ func (s *SongService) DeleteSongById(id int) error {
 	return s.repo.Delete(id)
 }
 
-func (s *SongService) CreateSong(group, song string) (models.Song, error) {
+func (s *SongService) CreateSong(group, song string, songDetails models.SongDetail) (models.Song, error) {
 	s.logger.Infof("CreateSong[service]: Создание песни группы: %s, название: %s", group, song)
-	songDetails, err := s.FetchSongDetails(group, song)
-	if err != nil {
-		s.logger.Errorf("CreateSong[service]: Ошибка получения деталей песни через API: %v", err)
-		return models.Song{}, err
-	}
 
 	// Parse release date from string to time.Time format
 	releaseDate, err := time.Parse("02.01.2006", songDetails.ReleaseDate)
@@ -110,31 +101,4 @@ func (s *SongService) CreateSong(group, song string) (models.Song, error) {
 
 	s.logger.Infof("CreateSong[service]: Песня успешно создана: %+v", createdSong)
 	return createdSong, nil
-}
-
-func (s *SongService) FetchSongDetails(group, song string) (*models.SongDetail, error) {
-	s.logger.Infof("FetchSongDetails[service]: Получение деталей песни через API для группы: %s, песни: %s", group, song)
-	url := s.externalAPI + "/info?group=" + group + "&song=" + song
-
-	resp, err := http.Get(url)
-	if err != nil {
-		s.logger.Errorf("FetchSongDetails[service]: Ошибка отправки запроса к API: %v", err)
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK {
-		s.logger.Errorf("FetchSongDetails[service]: API вернул ошибку: %s", resp.Status)
-		return nil, errors.New("API вернул ошибку: " + resp.Status)
-	}
-
-	// Парсинг ответа API
-	var songDetails models.SongDetail
-	if err = json.NewDecoder(resp.Body).Decode(&songDetails); err != nil {
-		s.logger.Errorf("FetchSongDetails[service]: Ошибка парсинга ответа от API: %v", err)
-		return nil, err
-	}
-
-	s.logger.Infof("FetchSongDetails[service]: Успешно получены детали песни через API")
-	return &songDetails, nil
 }

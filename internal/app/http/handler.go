@@ -17,15 +17,17 @@ import (
 
 // Handler struct wraps service interface, which interacts with business logic
 type Handler struct {
-	service api.Service
-	logger  *logrus.Logger
+	service     api.Service
+	externalAPI string
+	logger      *logrus.Logger
 }
 
 // New creates new Handler instance and takes api.Service and logger as parameters
-func New(service api.Service, logger *logrus.Logger) *Handler {
+func New(service api.Service, externalAPI string, logger *logrus.Logger) *Handler {
 	return &Handler{
-		service: service,
-		logger:  logger,
+		service:     service,
+		externalAPI: externalAPI,
+		logger:      logger,
 	}
 }
 
@@ -95,7 +97,7 @@ func (h *Handler) GetSongsHandler(w http.ResponseWriter, r *http.Request) {
 	// Respond with list of songs
 	w.Header().Set("Content-Type", "application/json")
 	if len(songs) == 0 {
-		json.NewEncoder(w).Encode("Список заметок пуст")
+		json.NewEncoder(w).Encode("Песня не найдена/Список песен пуст")
 		return
 	}
 	json.NewEncoder(w).Encode(songs)
@@ -298,14 +300,44 @@ func (h *Handler) AddSongHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	h.logger.Infof("AddSongHandler[handler]: Получение деталей песни через API для группы: %s, песни: %s",
+		input.Group, input.Song)
+
+	mockserverURL := h.externalAPI + "/info?group=" + input.Group + "&song=" + input.Song
+
+	// get song details from mockserver
+	resp, err := http.Get(mockserverURL)
+	if err != nil {
+		h.logger.Errorf("AddSongHandler[handler]: Ошибка отправки запроса к API: %v", err)
+		http.Error(w, "Проблема на сервере", http.StatusInternalServerError)
+		return
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		h.logger.Errorf("AddSongHandler[handler]: API вернул ошибку: %s", resp.Status)
+		http.Error(w, "Проблема на сервере", http.StatusInternalServerError)
+		return
+	}
+
+	// Parse API response
+	var songDetails models.SongDetail
+	if err = json.NewDecoder(resp.Body).Decode(&songDetails); err != nil {
+		h.logger.Errorf("AddSongHandler[handler]: Ошибка парсинга ответа от API: %v", err)
+		http.Error(w, "Проблема на сервере", http.StatusInternalServerError)
+		return
+	}
+
+	h.logger.Infof("AddSongHandler[handler]: Успешно получены детали песни через API")
+
 	// Call service to create song
-	createdSong, err := h.service.CreateSong(input.Group, input.Song)
+	createdSong, err := h.service.CreateSong(input.Group, input.Song, songDetails)
 	if err != nil {
 		http.Error(w, "Проблема на сервере", http.StatusInternalServerError)
 		return
 	}
 
-	// Respond with created task
+	// Respond with created song
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
 	json.NewEncoder(w).Encode(createdSong)

@@ -28,7 +28,7 @@ func New() (*Config, error) {
 		httpPort = defaultHttpPort
 	}
 
-	externalAPI := os.Getenv("EXTERNAL_API")
+	externalAPI := os.Getenv("EXTERNAL_API_URL")
 	if externalAPI == "" {
 		return nil, fmt.Errorf("externalAPI не задан")
 	}

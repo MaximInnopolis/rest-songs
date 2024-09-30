@@ -20,20 +20,6 @@ import (
 // @basePath /
 // @schemes http
 
-// CORS middleware
-func enableCORS(next http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Access-Control-Allow-Origin", "*") // Allow all origins or specify your frontend URL
-		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
-		w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
-		if r.Method == http.MethodOptions {
-			w.WriteHeader(http.StatusNoContent) // Respond with no content for preflight requests
-			return
-		}
-		next.ServeHTTP(w, r)
-	})
-}
-
 func main() {
 
 	// Initialize logger
@@ -63,16 +49,14 @@ func main() {
 	repo := postgresql.New(*db, log)
 
 	// Create a new service
-	taskService := api.New(repo, log)
+	songService := api.New(repo, log)
 
 	// Create Http handler
-	handler := httpHandler.New(taskService, log)
+	handler := httpHandler.New(songService, cfg.ExternalAPI, log)
 
 	// Init Router
 	r := mux.NewRouter()
 
-	// Register routes with CORS enabled
-	r.Use(enableCORS)
 	handler.RegisterRoutes(r)
 
 	// Start HTTP server

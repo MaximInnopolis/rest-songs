@@ -3,7 +3,7 @@ build:
 	docker-compose build
 
 up-all:
-	docker-compose up -d postgres app
+	docker-compose up -d postgres app mockserver
 
 down:
 	docker-compose down
