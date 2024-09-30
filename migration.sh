@@ -1,4 +1,4 @@
-#!/bin/sh
+goose -dir ./migrations postgres "postgres://postgres:password@localhost:5432/restSongs?sslmode=disable" status
 
 #until pg_isready -h postgres -p 5432 -U postgres -d restSongs; do
 #  echo "Waiting for database..."

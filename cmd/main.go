@@ -13,6 +13,27 @@ import (
 	"rest-songs/internal/app/repository/postgresql"
 )
 
+// @title Songs API
+// @version 1.0
+// @description API for managing a song library
+// @host localhost:8080
+// @basePath /
+// @schemes http
+
+// CORS middleware
+func enableCORS(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", "*") // Allow all origins or specify your frontend URL
+		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+		w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
+		if r.Method == http.MethodOptions {
+			w.WriteHeader(http.StatusNoContent) // Respond with no content for preflight requests
+			return
+		}
+		next.ServeHTTP(w, r)
+	})
+}
+
 func main() {
 
 	// Initialize logger
@@ -50,6 +71,8 @@ func main() {
 	// Init Router
 	r := mux.NewRouter()
 
+	// Register routes with CORS enabled
+	r.Use(enableCORS)
 	handler.RegisterRoutes(r)
 
 	// Start HTTP server

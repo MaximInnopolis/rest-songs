@@ -16,17 +16,14 @@ COPY . ./
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o /bin/app -v ./cmd
 
 ## Deploy
-FROM ubuntu:latest AS final
+FROM alpine:latest AS final
 
 WORKDIR /
 
-## Install Go
-#RUN apk add --no-cache bash
-
 COPY --from=build /bin/app /app
 
-## Install bash for command execution
-#RUN apk add --no-cache bash
+# Install bash for command execution
+RUN apk add --no-cache bash
 
 EXPOSE 8080
 EXPOSE 8090

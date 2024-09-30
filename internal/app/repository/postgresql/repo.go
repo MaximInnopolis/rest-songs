@@ -39,7 +39,7 @@ func New(db database.Database, logger *logrus.Logger) *Repo {
 func (r *Repo) GetWithFilter(filter models.SongFilters, page, pageSize int) ([]models.Song, error) {
 	r.logger.Infof("GetWithFilter[repo]: Получение песен с фильтром: %+v, страница: %d, размер страницы: %d", filter, page, pageSize)
 
-	query := `SELECT id, group, song, release_date, text, link, created_at, updated_at 
+	query := `SELECT id, "group", song, release_date, text, link, created_at, updated_at 
            FROM songs WHERE 1=1` // Where 1=1 for filtering logic, so that further conditions also consider
 
 	var songs []models.Song
@@ -105,7 +105,7 @@ func (r *Repo) GetWithFilter(filter models.SongFilters, page, pageSize int) ([]m
 func (r *Repo) GetById(id int) (models.Song, error) {
 	r.logger.Infof("GetById[repo]: Получение песни по ID: %d", id)
 
-	query := `SELECT id, group, song, release_date, text, link, created_at, updated_at FROM songs WHERE id = $1`
+	query := `SELECT id, "group", song, release_date, text, link, created_at, updated_at FROM songs WHERE id = $1`
 	var song models.Song
 	ctx := context.Background()
 
@@ -131,8 +131,8 @@ func (r *Repo) GetById(id int) (models.Song, error) {
 func (r *Repo) Update(id int, song models.Song) (models.Song, error) {
 	r.logger.Infof("Update[repo]: Обновление песни по ID: %d, данные: %+v", id, song)
 
-	query := `UPDATE songs SET group = $1, song = $2, release_date = $3, text = $4, link = $5, updated_at = NOW() 
-             WHERE id = $6 RETURNING id, group, song, release_date, text, link, created_at, updated_at`
+	query := `UPDATE songs SET "group" = $1, song = $2, release_date = $3, text = $4, link = $5, updated_at = NOW() 
+             WHERE id = $6 RETURNING id, "group", song, release_date, text, link, created_at, updated_at`
 	ctx := context.Background()
 
 	// Execute query and scan result into song object

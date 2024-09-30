@@ -9,6 +9,7 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/sirupsen/logrus"
+	httpSwagger "github.com/swaggo/http-swagger"
 	"rest-songs/internal/app/api"
 	"rest-songs/internal/app/models"
 	"rest-songs/internal/app/repository/postgresql"
@@ -28,6 +29,21 @@ func New(service api.Service, logger *logrus.Logger) *Handler {
 	}
 }
 
+// GetSongsHandler handles GET request for filtering and retrieving songs
+// @Summary Get songs
+// @Description Get songs with optional filters and pagination
+// @Tags Songs
+// @Accept json
+// @Produce json
+// @Param group query string false "Filter by group"
+// @Param song query string false "Filter by song title"
+// @Param release_date query string false "Filter by release date" Format("02.01.2006")
+// @Param page query int false "Page number" default(1)
+// @Param page_size query int false "Number of items per page" default(10)
+// @Success 200 {array} models.Song
+// @Failure 400 {string} string "Неправильный формат данных"
+// @Failure 500 {string} string "Проблема на сервере"
+// @Router /songs [get]
 func (h *Handler) GetSongsHandler(w http.ResponseWriter, r *http.Request) {
 	query := r.URL.Query()
 
@@ -76,11 +92,29 @@ func (h *Handler) GetSongsHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Respond with list of song
+	// Respond with list of songs
 	w.Header().Set("Content-Type", "application/json")
+	if len(songs) == 0 {
+		json.NewEncoder(w).Encode("Список заметок пуст")
+		return
+	}
 	json.NewEncoder(w).Encode(songs)
 }
 
+// GetSongTextHandler handles GET requests to retrieve paginated song text by song ID
+// @Summary Get paginated song text
+// @Description Get the verses of a song by its ID with optional pagination parameters
+// @Tags Songs
+// @Accept json
+// @Produce json
+// @Param id path int true "Song ID"
+// @Param page query int false "Page number" default(1)
+// @Param page_size query int false "Number of verses per page" default(10)
+// @Success 200 {array} string "Array of verses"
+// @Failure 400 {string} string "Неправильный формат ID или Страница выходит за пределы доступного диапазона"
+// @Failure 404 {string} string "Песня не найдена"
+// @Failure 500 {string} string "Проблема на сервере"
+// @Router /songs/text/{id} [get]
 func (h *Handler) GetSongTextHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	idStr := vars["id"]
@@ -133,8 +167,19 @@ func (h *Handler) GetSongTextHandler(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(verses)
 }
 
-// UpdateSongByIdHandler handles HTTP PUT request to update existing song by ID
-// It parses song ID and input data, calls service to update song, and returns updated song
+// UpdateSongByIdHandler handles PUT requests to update a song by its ID
+// @Summary Update song by ID
+// @Description Update an existing song's details by its ID
+// @Tags Songs
+// @Accept json
+// @Produce json
+// @Param id path int true "Song ID"
+// @Param song body object true "Song data to update"
+// @Success 200 {object} models.Song "Updated song object"
+// @Failure 400 {string} string "Неправильный формат ID, Неправильный формат данных, or Неправильный формат даты"
+// @Failure 404 {string} string "Песня не найдена"
+// @Failure 500 {string} string "Проблема на сервере"
+// @Router /songs/{id} [put]
 func (h *Handler) UpdateSongByIdHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	idStr := vars["id"]
@@ -195,8 +240,16 @@ func (h *Handler) UpdateSongByIdHandler(w http.ResponseWriter, r *http.Request) 
 	json.NewEncoder(w).Encode(updatedSong)
 }
 
-// DeleteSongByIdHandler handles HTTP DELETE request to delete song by ID
-// It parses song ID, calls service to delete song, and returns appropriate status
+// DeleteSongByIdHandler handles DELETE requests to remove a song by its ID
+// @Summary Delete song by ID
+// @Description Delete an existing song by its ID from the database
+// @Tags Songs
+// @Param id path int true "Song ID"
+// @Success 204 "No Content - Successfully deleted"
+// @Failure 400 {string} string "Неправильный формат ID"
+// @Failure 404 {string} string "Песня не найдена"
+// @Failure 500 {string} string "Проблема на сервере"
+// @Router /songs/{id} [delete]
 func (h *Handler) DeleteSongByIdHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	idStr := vars["id"]
@@ -225,11 +278,19 @@ func (h *Handler) DeleteSongByIdHandler(w http.ResponseWriter, r *http.Request) 
 	w.WriteHeader(http.StatusNoContent)
 }
 
+// AddSongHandler handles POST requests to add a new song
+// @Summary Add a new song
+// @Description Create a new song by providing the group and song title
+// @Tags Songs
+// @Accept json
+// @Produce json
+// @Param song body models.AddSongRequest true "Song details"
+// @Success 201 {object} models.Song "Created song"
+// @Failure 400 {string} string "Неправильный формат данных"
+// @Failure 500 {string} string "Проблема на сервере"
+// @Router /songs [post]
 func (h *Handler) AddSongHandler(w http.ResponseWriter, r *http.Request) {
-	var input struct {
-		Group string `json:"group"`
-		Song  string `json:"song"`
-	}
+	var input models.AddSongRequest
 
 	// Decode request body into input struct
 	if err := json.NewDecoder(r.Body).Decode(&input); err != nil {
@@ -252,9 +313,23 @@ func (h *Handler) AddSongHandler(w http.ResponseWriter, r *http.Request) {
 
 // RegisterRoutes registers HTTP routes for song operations
 func (h *Handler) RegisterRoutes(r *mux.Router) {
+	// API Routes
+	// @Router /songs [get]
 	r.HandleFunc("/songs", h.GetSongsHandler).Methods("GET")
-	r.HandleFunc("/songs/{id}/text", h.GetSongTextHandler).Methods("GET")
+
+	// @Router /songs/text/{id} [get]
+	r.HandleFunc("/songs/text/{id}", h.GetSongTextHandler).Methods("GET")
+
+	// @Router /songs/{id} [put]
 	r.HandleFunc("/songs/{id}", h.UpdateSongByIdHandler).Methods("PUT")
+
+	// @Router /songs/{id} [delete]
 	r.HandleFunc("/songs/{id}", h.DeleteSongByIdHandler).Methods("DELETE")
+
+	// @Router /songs [post]
 	r.HandleFunc("/songs", h.AddSongHandler).Methods("POST")
+
+	// Swagger documentation endpoint
+	r.PathPrefix("/docs/swagger/").Handler(httpSwagger.WrapHandler)
+	r.HandleFunc("/docs/swagger/index.html", httpSwagger.WrapHandler)
 }

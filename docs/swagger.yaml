@@ -1,0 +1,228 @@
+basePath: /
+definitions:
+  models.AddSongRequest:
+    properties:
+      group:
+        type: string
+      song:
+        type: string
+    type: object
+  models.Song:
+    properties:
+      created_at:
+        type: string
+      group:
+        type: string
+      id:
+        type: integer
+      link:
+        type: string
+      release_date:
+        type: string
+      song:
+        type: string
+      text:
+        type: string
+      updated_at:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: API for managing a song library
+  title: Songs API
+  version: "1.0"
+paths:
+  /songs:
+    get:
+      consumes:
+      - application/json
+      description: Get songs with optional filters and pagination
+      parameters:
+      - description: Filter by group
+        in: query
+        name: group
+        type: string
+      - description: Filter by song title
+        in: query
+        name: song
+        type: string
+      - description: Filter by release date
+        format: '"02.01.2006"'
+        in: query
+        name: release_date
+        type: string
+      - default: 1
+        description: Page number
+        in: query
+        name: page
+        type: integer
+      - default: 10
+        description: Number of items per page
+        in: query
+        name: page_size
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Song'
+            type: array
+        "400":
+          description: Неправильный формат данных
+          schema:
+            type: string
+        "500":
+          description: Проблема на сервере
+          schema:
+            type: string
+      summary: Get songs
+      tags:
+      - Songs
+    post:
+      consumes:
+      - application/json
+      description: Create a new song by providing the group and song title
+      parameters:
+      - description: Song details
+        in: body
+        name: song
+        required: true
+        schema:
+          $ref: '#/definitions/models.AddSongRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created song
+          schema:
+            $ref: '#/definitions/models.Song'
+        "400":
+          description: Неправильный формат данных
+          schema:
+            type: string
+        "500":
+          description: Проблема на сервере
+          schema:
+            type: string
+      summary: Add a new song
+      tags:
+      - Songs
+  /songs/{id}:
+    delete:
+      description: Delete an existing song by its ID from the database
+      parameters:
+      - description: Song ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses:
+        "204":
+          description: No Content - Successfully deleted
+        "400":
+          description: Неправильный формат ID
+          schema:
+            type: string
+        "404":
+          description: Песня не найдена
+          schema:
+            type: string
+        "500":
+          description: Проблема на сервере
+          schema:
+            type: string
+      summary: Delete song by ID
+      tags:
+      - Songs
+    put:
+      consumes:
+      - application/json
+      description: Update an existing song's details by its ID
+      parameters:
+      - description: Song ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Song data to update
+        in: body
+        name: song
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Updated song object
+          schema:
+            $ref: '#/definitions/models.Song'
+        "400":
+          description: Неправильный формат ID, Неправильный формат данных, or Неправильный
+            формат даты
+          schema:
+            type: string
+        "404":
+          description: Песня не найдена
+          schema:
+            type: string
+        "500":
+          description: Проблема на сервере
+          schema:
+            type: string
+      summary: Update song by ID
+      tags:
+      - Songs
+  /songs/text/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Get the verses of a song by its ID with optional pagination parameters
+      parameters:
+      - description: Song ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - default: 1
+        description: Page number
+        in: query
+        name: page
+        type: integer
+      - default: 10
+        description: Number of verses per page
+        in: query
+        name: page_size
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Array of verses
+          schema:
+            items:
+              type: string
+            type: array
+        "400":
+          description: Неправильный формат ID или Страница выходит за пределы доступного
+            диапазона
+          schema:
+            type: string
+        "404":
+          description: Песня не найдена
+          schema:
+            type: string
+        "500":
+          description: Проблема на сервере
+          schema:
+            type: string
+      summary: Get paginated song text
+      tags:
+      - Songs
+schemes:
+- http
+swagger: "2.0"
