@@ -6,6 +6,7 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/sirupsen/logrus"
+	_ "rest-songs/docs"
 	"rest-songs/internal/app/api"
 	"rest-songs/internal/app/config"
 	httpHandler "rest-songs/internal/app/http"
