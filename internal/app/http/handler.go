@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"net/http"
+	"net/url"
 	"strconv"
 	"time"
 
@@ -303,7 +304,14 @@ func (h *Handler) AddSongHandler(w http.ResponseWriter, r *http.Request) {
 	h.logger.Infof("AddSongHandler[handler]: Получение деталей песни через API для группы: %s, песни: %s",
 		input.Group, input.Song)
 
-	mockserverURL := h.externalAPI + "/info?group=" + input.Group + "&song=" + input.Song
+	// Encode group and song parameters for URL
+	group := url.QueryEscape(input.Group)
+	song := url.QueryEscape(input.Song)
+
+	mockserverURL := h.externalAPI + "/info?group=" + group + "&song=" + song
+
+	h.logger.Infof("AddSongHandler[handler]: mockserverURL: %s",
+		mockserverURL)
 
 	// get song details from mockserver
 	resp, err := http.Get(mockserverURL)

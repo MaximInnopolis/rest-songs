@@ -1,20 +1,166 @@
-{
-  "httpRequest": {
-    "method": "GET",
-    "path": "/info"
-  },
-  "httpResponse": {
-    "statusCode": 200,
-    "body": {
-      "releaseDate": "01.02.2017",
-      "text": "First things first\nI'ma say all the words inside my head\nI'm fired up and tired of the way that things have been, oh-ooh\nThe way that things have been, oh-ooh\n\nSecond thing second\nDon't you tell me what you think that I could be\nI'm the one at the sail, I'm the master of my sea, oh-ooh\nThe master of my sea, oh-ooh\n\nI was broken from a young age\nTaking my sulking to the masses\nWriting my poems for the few\nThat look at me, took to me, shook to me, feeling me\nSinging from heartache from the pain\nTaking my message from the veins\nSpeaking my lesson from the brain\nSeeing the beauty through the...\n\nPain!\nYou made me a, you made me a believer, believer\nPain!\nYou break me down and build me up, believer, believer\nPain!\nOh, let the bullets fly, oh, let them rain\nMy life, my love, my drive, it came from...\nPain!\nYou made me a, you made me a believer, believer\n\nFirst things first\nCan you imagine what's about to happen?\nIt's Weezy the Dragon, I link with the Dragons\nAnd we gon' get ratchet, no need for imaginin'\n\nThis is what's happenin'\nSecond thing second, I reckon immaculate\nSound about accurate\nI know that strength, it don't come, don't come without strategy\nI know the sweet, it don't come without cavities\nI know the passages come with some traffic\nI start with from the basement, end up in the attic\nAnd third thing third\nWhoever call me out, they simply can't count\nLet's get mathematic, I'm up in this, huh\n\nIs you a believer?\nI get a unicorn out of a zebra\nI wear my uniform like a tuxedo\nThis dragon don't hold his breath, don't need no breather\nLove you Ms. Cita, the son of a leader\nI know the bloomin' don't come without rain\nI know the losin' don't come without shame\nI know the beauty don't come without hurt\n\nHol' up, hol' up, last thing last\nI know that Tunechi don't come without Wayne\nI know that losin' don't come without game\nI know that glory don't come without...\nDon't come without...\n\nPain!\nYou made me a, you made me a believer, believer\nPain!\nYou break me down and build me up, believer, believer\nPain\nOh, let the bullets fly, oh, let them rain\nMy life, my love, my drive, it came from...\nPain!\nYou made me a, you made me a believer, believer\n\nLast things last\nBy the grace of fire and flames\nYou're the face of the future, the blood in my veins, oh-ooh\nThe blood in my veins, oh-ooh\nBut they never did, ever lived, ebbing and flowing\nInhibited, limited 'til it broke open and rained down\nIt rained down, like...\n\nPain!\nYou made me a, you made me a believer, believer\nPain!\nYou break me down and build me up, believer, believer\nPain\nOh, let the bullets fly, oh, let them rain\nMy life, my love, my drive, it came from...\nPain!\nYou made me a, you made me a believer, believer",
-      "link": "https://www.youtube.com/watch?v=7wtfhZwyrcc"
+[
+  {
+    "httpRequest": {
+      "method": "GET",
+      "path": "/info",
+      "queryStringParameters": {
+        "group": ["Imagine Dragons"],
+        "song": ["Believer"]
+      }
     },
-    "headers": {
-      "Content-Type": ["application/json"]
+    "httpResponse": {
+      "statusCode": 200,
+      "body": {
+        "releaseDate": "01.02.2017",
+        "text": "First things first\nI'ma say all the words inside my head...\nI'm fired up and tired of the way that things have been, oh-ooh\nThe way that things have been, oh-ooh\n\nSecond thing second\nDon't you tell me what you think that I could be\nI'm the one at the sail, I'm the master of my sea, oh-ooh\nThe master of my sea, oh-ooh\n\nI was broken from a young age\nTaking my sulking to the masses\nWriting my poems for the few\nThat look at me, took to me, shook to me, feeling me\nSinging from heartache from the pain\nTaking my message from the veins\nSpeaking my lesson from the brain\nSeeing the beauty through the...\n\nPain!\nYou made me a, you made me a believer, believer\nPain!\nYou break me down and build me up, believer, believer\nPain!\nOh, let the bullets fly, oh, let them rain\nMy life, my love, my drive, it came from...\nPain!\nYou made me a, you made me a believer, believer\n\nFirst things first\nCan you imagine what's about to happen?\nIt's Weezy the Dragon, I link with the Dragons\nAnd we gon' get ratchet, no need for imaginin'\n\nThis is what's happenin'\nSecond thing second, I reckon immaculate\nSound about accurate\nI know that strength, it don't come, don't come without strategy\nI know the sweet, it don't come without cavities\nI know the passages come with some traffic\nI start with from the basement, end up in the attic\nAnd third thing third\nWhoever call me out, they simply can't count\nLet's get mathematic, I'm up in this, huh\n\nIs you a believer?\nI get a unicorn out of a zebra\nI wear my uniform like a tuxedo\nThis dragon don't hold his breath, don't need no breather\nLove you Ms. Cita, the son of a leader\nI know the bloomin' don't come without rain\nI know the losin' don't come without shame\nI know the beauty don't come without hurt\n\nHol' up, hol' up, last thing last\nI know that Tunechi don't come without Wayne\nI know that losin' don't come without game\nI know that glory don't come without...\nDon't come without...\n\nPain!\nYou made me a, you made me a believer, believer\nPain!\nYou break me down and build me up, believer, believer\nPain\nOh, let the bullets fly, oh, let them rain\nMy life, my love, my drive, it came from...\nPain!\nYou made me a, you made me a believer, believer\n\nLast things last\nBy the grace of fire and flames\nYou're the face of the future, the blood in my veins, oh-ooh\nThe blood in my veins, oh-ooh\nBut they never did, ever lived, ebbing and flowing\nInhibited, limited 'til it broke open and rained down\nIt rained down, like...\n\nPain!\nYou made me a, you made me a believer, believer\nPain!\nYou break me down and build me up, believer, believer\nPain\nOh, let the bullets fly, oh, let them rain\nMy life, my love, my drive, it came from...\nPain!\nYou made me a, you made me a believer, believer",
+        "link": "https://www.youtube.com/watch?v=RgKAFK5djSk"
+      },
+      "headers": {
+        "Content-Type": ["application/json"]
+      }
+    },
+    "times": {
+      "unlimited": true
     }
   },
-  "times": {
-    "unlimited": true
+  {
+    "httpRequest": {
+      "method": "GET",
+      "path": "/info",
+      "queryStringParameters": {
+        "group": ["Linkin park"],
+        "song": ["In the end"]
+      }
+    },
+    "httpResponse": {
+      "statusCode": 200,
+      "body": {
+        "releaseDate": "09.10.2000",
+        "text": "It starts with one\n\nOne thing, I don't know why\nIt doesn't even matter how hard you try\nKeep that in mind, I designed this rhyme\nTo explain in due time, all I know\nTime is a valuable thing\nWatch it fly by as the pendulum swings\nWatch it count down to the end of the day\nThe clock ticks life away, it's so unreal\nDidn't look out below\nWatch the time go right out the window\nTryin' to hold on, d-didn't even know\nI wasted it all just to watch you go\n\nI kept everything inside\nAnd even though I tried, it all fell apart\nWhat it meant to me will eventually be\nA memory of a time when I tried so hard\n\nI tried so hard and got so far\nBut in the end, it doesn't even matter\nI had to fall to lose it all\nBut in the end, it doesn't even matter\n\nOne thing, I don't know why\nIt doesn't even matter how hard you try\nKeep that in mind, I designed this rhyme\nTo remind myself how I tried so hard\nIn spite of the way you were mockin' me\nActin' like I was part of your property\nRemembering all the times you fought with me\nI'm surprised it got so far\nThings aren't the way they were before\nYou wouldn't even recognize me anymore\nNot that you knew me back then\nBut it all comes back to me in the end\n\nYou kept everything inside\nAnd even though I tried, it all fell apart\nWhat it meant to me will eventually be\nA memory of a time when I tried so hard\n\nI tried so hard and got so far\nBut in the end, it doesn't even matter\nI had to fall to lose it all\nBut in the end, it doesn't even matter\n\nI've put my trust in you\nPushed as far as I can go\nFor all this, there's only one thing you should know\nI've put my trust in you\nPushed as far as I can go\nFor all this, there's only one thing you should know\n\nI tried so hard and got so far\nBut in the end, it doesn't even matter\nI had to fall to lose it all\nBut in the end, it doesn't even matter",
+        "link": "https://www.youtube.com/watch?v=eVTXPUF4Oz4"
+      },
+      "headers": {
+        "Content-Type": ["application/json"]
+      }
+    },
+    "times": {
+      "unlimited": true
+    }
+  },
+  {
+    "httpRequest": {
+      "method": "GET",
+      "path": "/info",
+      "queryStringParameters": {
+        "group": ["Tame Impala"],
+        "song": ["Mind Mischief"]
+      }
+    },
+    "httpResponse": {
+      "statusCode": 200,
+      "body": {
+        "releaseDate": "26.01.2012",
+        "text": "Feels like my life is ready to blow\nMe and my love, we'll take it slow\nI hope she knows that I'll love her long\nI just don't know where the hell I belong (No, no)\n\nHow optimism led me astray\nTwo hundred things I took the wrong way\nBut I saw her love gauge runnin' low\nI tried to fill but it overflowed\n\nFeels like my life is ready to blow\nMe and my lover taking it slow\nI hope she knows that I'll love her long\nI just don't know where the hell I belong\n\nShe remembers my name\nCould be blown way out\nIt's all going to change\nShe remembers my name\n\nBut she was only messing around\nPlease, no more playing with my heart\nOoh, go Mr. Right just for once\n(Then it all just came out)\nOoh, no more mischief with my mind\n(Guess I'll hold in, next time...)\n\nNo more gettin' it wrong\nI'll be frozen, here on\nIf forever, we'll see\nNo more guessin' for me\n\nOh, I was just so sure of everything\nOh, that's what you get for dreamin' aloud\n(Then it all just came out)\n(Guess I'll hold in, now on)\n(If forever, we'll see)\nOh, the day that words are clearer for me\n(But no more guessing for me)",
+        "link": "https://www.youtube.com/watch?v=BQKKDNCpVbo"
+      },
+      "headers": {
+        "Content-Type": ["application/json"]
+      }
+    },
+    "times": {
+      "unlimited": true
+    }
+  },
+  {
+    "httpRequest": {
+      "method": "GET",
+      "path": "/info",
+      "queryStringParameters": {
+        "group": ["Lady Gaga"],
+        "song": ["Shallow"]
+      }
+    },
+    "httpResponse": {
+      "statusCode": 200,
+      "body": {
+        "releaseDate": "27.09.2018",
+        "text": "Tell me somethin', girl\nAre you happy in this modern world?\nOr do you need more?\nIs there somethin' else you're searchin' for?\n\nI'm fallin'\nIn all the good times, I find myself longin'\nFor change\nAnd, in the bad times, I fear myself\n\nTell me something, boy\nAren't you tired tryna fill that void?\nOr do you need more?\nAin't it hard keepin' it so hardcore?\n\nI'm falling\nIn all the good times, I find myself longing\nFor change\nAnd, in the bad times, I fear myself\n\nI'm off the deep end, watch as I dive in\nI'll never meet the ground\nCrash through the surface where they can't hurt us\nWe're far from the shallow now\n\nIn the sha-ha, sha-hallow\nIn the sha-ha, sha-la-la-la-low\nIn the sha-ha, sha-hallow\nWe're far from the shallow now\n\nOh, ha, ah, ha\nOh-ah, ha\n\nI'm off the deep end, watch as I dive in\nI'll never meet the ground\nCrash through the surface where they can't hurt us\nWe're far from the shallow now\n\nIn the sha-ha, shallow\nIn the sha-ha, sha-la-la-la-low\nIn the sha-ha, shallow\nWe're far from the shallow now",
+        "link": "https://www.youtube.com/watch?v=bo_efYhYU2A"
+      },
+      "headers": {
+        "Content-Type": ["application/json"]
+      }
+    },
+    "times": {
+      "unlimited": true
+    }
+  },
+  {
+    "httpRequest": {
+      "method": "GET",
+      "path": "/info",
+      "queryStringParameters": {
+        "group": ["Katy Perry"],
+        "song": ["Firework"]
+      }
+    },
+    "httpResponse": {
+      "statusCode": 200,
+      "body": {
+        "releaseDate": "26.10.2010",
+        "text": "Do you ever feel like a plastic bag\nDrifting through the wind, wanting to start again?\nDo you ever feel, feel so paper-thin\nLike a house of cards, one blow from cavin' in?\nDo you ever feel already buried deep?\nSix feet under screams, but no one seems to hear a thing\nDo you know that there's still a chance for you?\n'Cause there's a spark in you\n\nYou just gotta ignite the light\nAnd let it shine\nJust own the night\nLike the Fourth of July\n\n'Cause baby, you're a firework\nCome on show 'em what you're worth\nMake 'em go, Awe, awe, awe\nAs you shoot across the sky-y-y",
+        "link": "https://www.youtube.com/watch?v=KSbwHzlcgs8"
+      },
+      "headers": {
+        "Content-Type": ["application/json"]
+      }
+    },
+    "times": {
+      "unlimited": true
+    }
+  },
+  {
+    "httpRequest": {
+      "method": "GET",
+      "path": "/info",
+      "queryStringParameters": {
+        "group": ["Pharrell Williams"],
+        "song": ["Happy"]
+      }
+    },
+    "httpResponse": {
+      "statusCode": 200,
+      "body": {
+        "releaseDate": "05.04.2014",
+        "text": "It might seem crazy what I'm 'bout to say\nSunshine she's here, you can take a break\nI'm a hot air balloon that could go to space\nWith the air, like I don't care, baby, by the way, huh\n\n(Because I'm happy)\nClap along if you feel like a room without a roof\n(Because I'm happy)\nClap along if you feel like happiness is the truth\n(Because I'm happy)\nClap along if you know what happiness is to you\n(Because I'm happy)\nClap along if you feel like that's what you wanna do\n\nHere come bad news, talking this and that (Yeah!)\nWell, give me all you got, don't hold it back (Yeah!)\nWell, I should probably warn ya, I'll be just fine (Yeah!)\nNo offense to you, don’t waste your time, here's why\n\n(Because I'm happy)\nClap along if you feel like a room without a roof\n(Because I'm happy)\nClap along if you feel like happiness is the truth\n(Because I'm happy)",
+        "link": "https://www.youtube.com/watch?v=ZbZSe6AiEP0"
+      },
+      "headers": {
+        "Content-Type": ["application/json"]
+      }
+    },
+    "times": {
+      "unlimited": true
+    }
+  },
+  {
+    "httpRequest": {
+      "method": "GET",
+      "path": "/info"
+    },
+    "httpResponse": {
+      "statusCode": 200,
+      "body": {
+        "releaseDate": "25.10.2009",
+        "text": "We're no strangers to love\nYou know the rules and so do I (do I)\nA full commitment's what I'm thinking of\nYou wouldn't get this from any other guy\n\nI just wanna tell you how I'm feeling\nGotta make you understand\n\nNever gonna give you up\nNever gonna let you down\nNever gonna run around and desert you\nNever gonna make you cry\nNever gonna say goodbye\nNever gonna tell a lie and hurt you\n\nWe've known each other for so long\nYour heart's been aching, but you're too shy to say it (say it)\nInside, we both know what's been going on (going on)\nWe know the game and we're gonna play it\n\nAnd if you ask me how I'm feeling\nDon't tell me you're too blind to see\n\nNever gonna give you up\nNever gonna let you down\nNever gonna run around and desert you\nNever gonna make you cry\nNever gonna say goodbye\nNever gonna tell a lie and hurt you\n\nNever gonna give you up\nNever gonna let you down\nNever gonna run around and desert you\nNever gonna make you cry\nNever gonna say goodbye\nNever gonna tell a lie and hurt you\n\nWe've known each other for so long\n\nYour heart's been aching, but you're too shy to say it (to say it)\n\nInside, we both know what's been going on (going on)\n\nWe know the game and we're gonna play it\n\nI just wanna tell you how I'm feeling\n\nGotta make you understand\n\nNever gonna give you up\n\nNever gonna let you down\n\nNever gonna run around and desert you\nNever gonna make you cry\nNever gonna say goodbye\nNever gonna tell a lie and hurt you\n\nNever gonna give you up\nNever gonna let you down\nNever gonna run around and desert you\nNever gonna make you cry\nNever gonna say goodbye\nNever gonna tell a lie and hurt you\n\nNever gonna give you up\nNever gonna let you down\nNever gonna run around and desert you\nNever gonna make you cry\nNever gonna say goodbye\nNever gonna tell a lie and hurt you",
+        "link": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+      },
+      "headers": {
+        "Content-Type": ["application/json"]
+      }
+    },
+    "times": {
+      "unlimited": true
+    }
   }
-}
+]
