@@ -52,8 +52,3 @@ Mockserver доступен по адресу <http:localhost:1080>
 Swagger доступен по адресу <http://localhost:8080/docs/swagger/index.html>
 
 Postman коллекция доступна по следующему пути: [Postman коллекция](docs/songs.postman_collection.json)
-
-## Примечания
-
-Использовать дату в формате 02.01.2006
-По дефолту page = 1, pageSize = 10 (10 песен на странице)
