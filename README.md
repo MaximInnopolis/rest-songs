@@ -46,8 +46,11 @@ curl -X PUT "http://localhost:1080/mockserver/expectation" -d @docs/expectation.
 ```
 
 API доступен по адресу <http:localhost:8080>
+
 Mockserver доступен по адресу <http:localhost:1080>
+
 Swagger доступен по адресу <http://localhost:8080/docs/swagger/index.html>
+
 Postman коллекция доступна по следующему пути: [Postman коллекция](docs/songs.postman_collection.json)
 
 ## Примечания
