@@ -7,7 +7,7 @@ import (
 
 var defaultHttpPort = ":8080"
 
-// Config struct holds configuration values for database url and http port
+// Config struct holds configuration values for database url, http port and external api url
 type Config struct {
 	DbUrl       string
 	HttpPort    string

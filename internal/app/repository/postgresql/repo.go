@@ -36,6 +36,8 @@ func New(db database.Database, logger *logrus.Logger) *Repo {
 	}
 }
 
+// GetWithFilter retrieves songs from database based on the provided filter criteria,
+// supporting pagination. It returns slice of Song models and error if any occurs
 func (r *Repo) GetWithFilter(filter models.SongFilters, page, pageSize int) ([]models.Song, error) {
 	r.logger.Infof("GetWithFilter[repo]: Получение песен с фильтром: %+v, страница: %d, размер страницы: %d", filter, page, pageSize)
 
@@ -102,6 +104,7 @@ func (r *Repo) GetWithFilter(filter models.SongFilters, page, pageSize int) ([]m
 	return songs, nil
 }
 
+// GetById retrieves song by ID from database. If song not found, returns ErrSongNotFound
 func (r *Repo) GetById(id int) (models.Song, error) {
 	r.logger.Infof("GetById[repo]: Получение песни по ID: %d", id)
 
@@ -177,6 +180,7 @@ func (r *Repo) Delete(id int) error {
 	return nil
 }
 
+// Create inserts new song into database and returns created song with generated ID, created_at, and updated_at fields
 func (r *Repo) Create(song models.Song) (models.Song, error) {
 	r.logger.Infof("Create[repo]: Создание новой песни: %+v", song)
 

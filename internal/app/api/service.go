@@ -12,6 +12,8 @@ import (
 
 var ErrPageOutOfBounds = errors.New("page out of bounds")
 
+// Service defines interface for song service, which includes methods
+// to create, retrieve, update, and delete songs
 type Service interface {
 	GetSongsWithFilter(filter models.SongFilters, page, pageSize int) ([]models.Song, error)
 	GetSongText(id, page, pageSize int) ([]string, error)
@@ -20,11 +22,14 @@ type Service interface {
 	CreateSong(group, song string, songDetails models.SongDetail) (models.Song, error)
 }
 
+// SongService is implementation of Service interface
+// It interacts with repository to perform CRUD operations on songs
 type SongService struct {
 	repo   postgresql.Repository
 	logger *logrus.Logger
 }
 
+// New creates new SongService instance and takes Repository and logger as parameters
 func New(repo postgresql.Repository, logger *logrus.Logger) *SongService {
 	return &SongService{
 		repo:   repo,
@@ -32,10 +37,13 @@ func New(repo postgresql.Repository, logger *logrus.Logger) *SongService {
 	}
 }
 
+// GetSongsWithFilter retrieves list of all songs from repository with given filters
 func (s *SongService) GetSongsWithFilter(filter models.SongFilters, page, pageSize int) ([]models.Song, error) {
 	return s.repo.GetWithFilter(filter, page, pageSize)
 }
 
+// GetSongText retrieves text of song by its ID, with support for pagination
+// It returns slice of strings representing verses of song
 func (s *SongService) GetSongText(id, page, pageSize int) ([]string, error) {
 	s.logger.Infof("GetSongText[service]: Получение текста песни ID: %d, страница: %d, размер страницы: %d", id, page, pageSize)
 	song, err := s.repo.GetById(id)
@@ -75,6 +83,7 @@ func (s *SongService) DeleteSongById(id int) error {
 	return s.repo.Delete(id)
 }
 
+// CreateSong creates new song using repository and returns created song
 func (s *SongService) CreateSong(group, song string, songDetails models.SongDetail) (models.Song, error) {
 	s.logger.Infof("CreateSong[service]: Создание песни группы: %s, название: %s", group, song)
 
